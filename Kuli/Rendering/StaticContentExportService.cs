@@ -10,7 +10,7 @@ namespace Kuli.Rendering
 {
     public class StaticContentExportService
     {
-        private readonly DirectoryDiscoveryOptions _dirOptions;
+        private readonly DirectoryOptions _dirOptions;
         private readonly StaticContentImportService _importService;
         private readonly ILogger<StaticContentExportService> _logger;
         private readonly PublishDirectoryWriter _outputWriter;
@@ -19,7 +19,7 @@ namespace Kuli.Rendering
         public StaticContentExportService(ILogger<StaticContentExportService> logger,
             PublishDirectoryWriter outputWriter,
             SiteRenderingContext siteContext, StaticContentImportService importService,
-            IOptions<DirectoryDiscoveryOptions> dirOptions)
+            IOptions<DirectoryOptions> dirOptions)
         {
             _logger = logger;
             _outputWriter = outputWriter;

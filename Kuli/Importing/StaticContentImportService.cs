@@ -11,12 +11,12 @@ namespace Kuli.Importing
 {
     public class StaticContentImportService
     {
-        private readonly DirectoryDiscoveryOptions _dirOptions;
+        private readonly DirectoryOptions _dirOptions;
         private readonly ILogger<StaticContentImportService> _logger;
         private readonly SiteRenderingContext _siteContext;
 
         public StaticContentImportService(ILogger<StaticContentImportService> logger,
-            IOptions<DirectoryDiscoveryOptions> dirOptions, SiteRenderingContext siteContext)
+            IOptions<DirectoryOptions> dirOptions, SiteRenderingContext siteContext)
         {
             _logger = logger;
             _siteContext = siteContext;

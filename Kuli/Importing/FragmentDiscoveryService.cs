@@ -13,9 +13,9 @@ namespace Kuli.Importing
     {
         private readonly RawFragmentImporterService _importerService;
         private readonly ILogger<FragmentDiscoveryService> _logger;
-        private readonly DirectoryDiscoveryOptions _options;
+        private readonly DirectoryOptions _options;
 
-        public FragmentDiscoveryService(IOptions<DirectoryDiscoveryOptions> options,
+        public FragmentDiscoveryService(IOptions<DirectoryOptions> options,
             RawFragmentImporterService importerService, ILogger<FragmentDiscoveryService> logger)
         {
             _importerService = importerService;

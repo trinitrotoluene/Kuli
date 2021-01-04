@@ -47,7 +47,7 @@ var hostBuilder = Host.CreateDefaultBuilder(args)
         services.AddSingleton<KuliExportPipeline>();
 
         services.AddOptions<LoggingOptions>().BindConfiguration(LoggingOptions.Section);
-        services.AddOptions<DirectoryDiscoveryOptions>().BindConfiguration(DirectoryDiscoveryOptions.Section);
+        services.AddOptions<DirectoryOptions>().BindConfiguration(DirectoryOptions.Section);
         services.AddHostedService<KuliExecutionService>();
 
         services.AddSingleton(

@@ -1,6 +1,6 @@
 namespace Kuli.Configuration
 {
-    public sealed class DirectoryDiscoveryOptions
+    public sealed class DirectoryOptions
     {
         public const string Section = "dirs";
 

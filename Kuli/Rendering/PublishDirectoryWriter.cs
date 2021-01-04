@@ -9,10 +9,10 @@ namespace Kuli.Rendering
 {
     public class PublishDirectoryWriter
     {
-        private readonly DirectoryDiscoveryOptions _dirOptions;
+        private readonly DirectoryOptions _dirOptions;
         private readonly ILogger<PublishDirectoryWriter> _logger;
 
-        public PublishDirectoryWriter(IOptions<DirectoryDiscoveryOptions> dirOptions,
+        public PublishDirectoryWriter(IOptions<DirectoryOptions> dirOptions,
             ILogger<PublishDirectoryWriter> logger)
         {
             _logger = logger;

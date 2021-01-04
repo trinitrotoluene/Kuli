@@ -13,10 +13,10 @@ namespace Kuli.Importing
     public class TemplateImportService
     {
         private readonly ILogger<TemplateImportService> _logger;
-        private readonly DirectoryDiscoveryOptions _options;
+        private readonly DirectoryOptions _options;
         private readonly SiteRenderingContext _siteRenderingContext;
 
-        public TemplateImportService(IOptions<DirectoryDiscoveryOptions> options, ILogger<TemplateImportService> logger,
+        public TemplateImportService(IOptions<DirectoryOptions> options, ILogger<TemplateImportService> logger,
             SiteRenderingContext siteContext)
         {
             _logger = logger;
