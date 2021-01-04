@@ -1,10 +1,12 @@
-logging:
-  level: verbose # verbose, debug, information, warning, fatal
+Logging:
+  Level: Verbose # Verbose, Debug, Information, Warning, Fatal
 
-dirs:
-  fragments: Content
-  templates: Templates
-  output: Public
+Dirs:
+  Fragments: Content
+  Templates: Templates
+  Output: Public
+  Assets: Assets
+  AssetsOutput: Assets
   
-site:
-  title: My Awesome Title
+Site:
+  Title: My Awesome Title

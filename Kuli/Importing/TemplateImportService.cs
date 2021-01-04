@@ -12,24 +12,26 @@ namespace Kuli.Importing
 {
     public class TemplateImportService
     {
-        private readonly DirectoryDiscoveryOptions _options;
         private readonly ILogger<TemplateImportService> _logger;
-        private readonly GlobalContextService _globalContext;
+        private readonly DirectoryDiscoveryOptions _options;
+        private readonly SiteRenderingContext _siteRenderingContext;
 
         public TemplateImportService(IOptions<DirectoryDiscoveryOptions> options, ILogger<TemplateImportService> logger,
-            GlobalContextService globalContext)
+            SiteRenderingContext siteContext)
         {
             _logger = logger;
-            _globalContext = globalContext;
+            _siteRenderingContext = siteContext;
             _options = options.Value;
         }
 
         public async Task ImportTemplatesAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Searching for templates in {directory}", _options.Templates);
             var sw = Stopwatch.StartNew();
-            
-            var files = Directory.GetFiles(_options.Templates, "*.liquid", SearchOption.AllDirectories);
+
+            var basePath = Path.GetFullPath(_options.Templates);
+            _logger.LogInformation("Importing templates in {path}", basePath);
+
+            var files = Directory.GetFiles(basePath, "*.liquid", SearchOption.AllDirectories);
             foreach (var file in files)
             {
                 _logger.LogDebug("Importing {file}", file);
@@ -37,16 +39,17 @@ namespace Kuli.Importing
                 if (FluidTemplate.TryParse(content, out var template))
                 {
                     var templateName = Path.GetFileNameWithoutExtension(file);
-                    _globalContext.Templates[templateName] = template;
+                    _siteRenderingContext.Templates[templateName] = template;
                 }
                 else
                 {
                     _logger.LogWarning("Failed to parse template {file}", file);
                 }
             }
-            
+
             sw.Stop();
-            _logger.LogInformation("Imported {count} templates in {time}ms", _globalContext.Templates.Count, sw.ElapsedMilliseconds);
+            _logger.LogInformation("Imported {count} templates in {time}ms", _siteRenderingContext.Templates.Count,
+                sw.ElapsedMilliseconds);
         }
     }
 }

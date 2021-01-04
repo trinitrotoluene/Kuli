@@ -5,14 +5,13 @@ namespace Kuli.Importing
 {
     public sealed class RawFragmentImporterService
     {
+        private const string FrontMatterFence = "---";
         private readonly ILogger<RawFragmentImporterService> _logger;
 
         public RawFragmentImporterService(ILogger<RawFragmentImporterService> logger)
         {
             _logger = logger;
         }
-
-        private const string FrontMatterFence = "---";
 
         public RawFragment Import(string fileName, string rawElement)
         {
@@ -27,7 +26,7 @@ namespace Kuli.Importing
         {
             if (startIndex >= rawFragment.Length)
                 return string.Empty;
-            
+
             var markdownStartIndex = startIndex switch
             {
                 0 => 0,
@@ -46,14 +45,15 @@ namespace Kuli.Importing
 
             var fenceEndIndex = rawElement.IndexOf(FrontMatterFence, fenceStartIndex + FrontMatterFence.Length,
                 StringComparison.Ordinal);
-            
+
             if (fenceEndIndex < fenceStartIndex)
                 throw new ImportException("Missing closing front matter tag.");
 
             var startIndex = fenceStartIndex + FrontMatterFence.Length;
             var length = fenceEndIndex - startIndex;
 
-            _logger.LogTrace("Detected front matter in fragment, extracting {length} characters from index {start}", length, startIndex);
+            _logger.LogTrace("Detected front matter in fragment, extracting {length} characters from index {start}",
+                length, startIndex);
             return (fenceEndIndex, rawElement.Substring(startIndex, fenceEndIndex - startIndex));
         }
     }

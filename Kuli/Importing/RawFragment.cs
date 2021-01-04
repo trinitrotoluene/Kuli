@@ -10,9 +10,9 @@ namespace Kuli.Importing
         }
 
         public string FrontMatter { get; }
-        
+
         public string PageMarkdown { get; }
-        
+
         public string FileName { get; set; }
     }
 }

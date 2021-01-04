@@ -11,29 +11,29 @@ namespace Kuli.Importing
 {
     public class FragmentImportService
     {
-        private readonly ILogger<FragmentImportService> _logger;
-        private readonly IDeserializer _yamlDeserializer;
-        private readonly MarkdownPipeline _markdownPipeline;
         private readonly FragmentDiscoveryService _discoveryService;
-        private readonly GlobalContextService _globalContext;
+        private readonly ILogger<FragmentImportService> _logger;
+        private readonly MarkdownPipeline _markdownPipeline;
+        private readonly SiteRenderingContext _siteRenderingContext;
+        private readonly IDeserializer _yamlDeserializer;
 
         public FragmentImportService(ILogger<FragmentImportService> logger, IDeserializer yamlDeserializer,
             MarkdownPipeline markdownPipeline, FragmentDiscoveryService discoveryService,
-            GlobalContextService globalContext)
+            SiteRenderingContext siteContext)
         {
             _logger = logger;
             _yamlDeserializer = yamlDeserializer;
             _markdownPipeline = markdownPipeline;
             _discoveryService = discoveryService;
-            _globalContext = globalContext;
+            _siteRenderingContext = siteContext;
         }
 
         public async Task ImportFragmentsAsync(CancellationToken cancellationToken)
         {
             var sw = Stopwatch.StartNew();
             var fragments = await _discoveryService.DiscoverFragmentsAsync(cancellationToken);
-            
-            _logger.LogInformation("Beginning import");
+
+            _logger.LogInformation("Preprocessing fragments");
 
             foreach (var fragment in fragments)
             {
@@ -41,16 +41,17 @@ namespace Kuli.Importing
                 _logger.LogTrace("YAML extraction result: {@FrontMatter}", frontMatter);
                 var html = ProcessMarkdown(fragment);
                 _logger.LogTrace("Markdown compilation result: {html}", html);
-                
+
                 var fragmentRef = frontMatter.TryGetValue("name", out var name) ? name : fragment.FileName;
                 var processedFragment = new Fragment(fragmentRef, frontMatter, html);
-                
-                _globalContext.Fragments.Add(fragmentRef, processedFragment);
+
+                _siteRenderingContext.Fragments.Add(fragmentRef, processedFragment);
                 _logger.LogDebug("Successfully imported fragment {name} to build context", fragmentRef);
             }
-            
+
             sw.Stop();
-            _logger.LogInformation("Imported {count} fragments in {time}ms", _globalContext.Fragments.Count, sw.ElapsedMilliseconds);
+            _logger.LogInformation("Imported {count} fragments in {time}ms", _siteRenderingContext.Fragments.Count,
+                sw.ElapsedMilliseconds);
         }
 
         private string ProcessMarkdown(RawFragment fragment)
@@ -72,7 +73,7 @@ namespace Kuli.Importing
                 _logger.LogTrace("Fragment has no front matter to process");
                 return new Dictionary<string, string>();
             }
-            
+
             var frontMatter = _yamlDeserializer.Deserialize<Dictionary<string, string>>(fragment.FrontMatter);
             return frontMatter;
         }

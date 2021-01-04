@@ -12,9 +12,9 @@ namespace Kuli.Importing
         }
 
         public string Name { get; }
-        
+
         public Dictionary<string, string> FrontMatter { get; }
-        
+
         public string Html { get; }
 
         public string Template => FrontMatter.TryGetValue("template", out var template) ? template : "default";
