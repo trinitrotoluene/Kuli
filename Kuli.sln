@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kuli", "Kuli\Kuli.csproj", "{1C8E1073-D8D1-48B9-ADEC-5FA1C14476AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kuli.Tests", "Kuli.Tests\Kuli.Tests.csproj", "{33705975-C5FE-4340-9BCA-4064E2714E9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C8E1073-D8D1-48B9-ADEC-5FA1C14476AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8E1073-D8D1-48B9-ADEC-5FA1C14476AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C8E1073-D8D1-48B9-ADEC-5FA1C14476AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C8E1073-D8D1-48B9-ADEC-5FA1C14476AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33705975-C5FE-4340-9BCA-4064E2714E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33705975-C5FE-4340-9BCA-4064E2714E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33705975-C5FE-4340-9BCA-4064E2714E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33705975-C5FE-4340-9BCA-4064E2714E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

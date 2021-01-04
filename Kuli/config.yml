@@ -1,0 +1,10 @@
+logging:
+  level: verbose # verbose, debug, information, warning, fatal
+
+dirs:
+  fragments: Content
+  templates: Templates
+  output: Public
+  
+site:
+  title: My Awesome Title
