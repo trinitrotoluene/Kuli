@@ -19,6 +19,6 @@ namespace Kuli.Importing
 
         public string Template => FrontMatter.TryGetValue("template", out var template) ? template : "default";
 
-        public string Type => FrontMatter.TryGetValue("type", out var type) ? type : "fragment";
+        public string Type => FrontMatter.TryGetValue("type", out var type) ? type : "default";
     }
 }

@@ -1,9 +1,10 @@
 ---
-template: sampleTemplate
+template: post
 type: content
+name: Hello, World!
 ---
 
-# Header
+# Hello, World!
 
 Line with **content** _in_ it.
 

@@ -13,6 +13,6 @@ namespace Kuli.Importing
 
         public string PageMarkdown { get; }
 
-        public string FileName { get; set; }
+        public string FileName { get; }
     }
 }

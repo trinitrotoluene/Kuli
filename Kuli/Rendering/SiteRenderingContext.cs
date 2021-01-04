@@ -10,15 +10,12 @@ namespace Kuli.Rendering
         public SiteRenderingContext(IConfiguration configuration)
         {
             StaticContent = new Dictionary<string, StaticContent>();
-            Categories = new Dictionary<string, Fragment[]>();
             Fragments = new Dictionary<string, Fragment>();
             Templates = new Dictionary<string, FluidTemplate>();
             Items = new Dictionary<string, string>();
 
             configuration.GetSection("site").Bind(Items);
         }
-
-        public IDictionary<string, Fragment[]> Categories { get; }
 
         public IDictionary<string, Fragment> Fragments { get; }
 
@@ -30,10 +27,14 @@ namespace Kuli.Rendering
 
         public void ApplyValues(TemplateContext ctx)
         {
-            ctx.SetValue("Categories", Categories);
-            ctx.SetValue("Fragments", Fragments);
-            ctx.SetValue("Templates", Templates);
+            ctx.SetValue("Fragments", Fragments.Values);
+            ctx.SetValue("Templates", Templates.Values);
             ctx.SetValue("Items", Items);
+        }
+
+        static SiteRenderingContext()
+        {
+            TemplateContext.GlobalMemberAccessStrategy.Register<Fragment>();
         }
     }
 }

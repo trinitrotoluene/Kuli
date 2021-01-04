@@ -45,6 +45,7 @@ var hostBuilder = Host.CreateDefaultBuilder(args)
         services.AddSingleton<StaticContentExportService>();
         services.AddSingleton<KuliImportPipeline>();
         services.AddSingleton<KuliExportPipeline>();
+        services.AddSingleton<PublishDirectoryCleanupService>();
 
         services.AddOptions<LoggingOptions>().BindConfiguration(LoggingOptions.Section);
         services.AddOptions<DirectoryOptions>().BindConfiguration(DirectoryOptions.Section);
